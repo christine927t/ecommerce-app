@@ -1,0 +1,7 @@
+@import "tailwindcss";
+/* global styles */
+html,body,#root { height: 100%; }
+
+.MuiContainer-root { 
+    max-width: 1400px;
+}
