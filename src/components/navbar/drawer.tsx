@@ -50,7 +50,7 @@ export default function TemporaryDrawer() {
   );
 
   return (
-    <div className="block md:hidden">
+    <div className="block md:hidden cursor-pointer">
       <DragHandleIcon onClick={toggleDrawer(true)}></DragHandleIcon>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
