@@ -17,6 +17,8 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
+import "../../styles/basic-menubar.css"
+
 const StyledMenubar = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: '1px',

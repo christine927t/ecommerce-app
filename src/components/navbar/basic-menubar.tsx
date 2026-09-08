@@ -10,9 +10,9 @@ import {
   MenuSeparator,
   MenuSubmenuRoot,
   MenuSubmenuTrigger,
-} from './Menubar';
+} from './menu-bar';
 
-import '../styles/basicmenubar.css'
+import '../../styles/basic-menubar.css'
 
 export default function BasicMenubar() {
   return (

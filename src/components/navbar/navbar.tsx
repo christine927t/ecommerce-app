@@ -12,7 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ApiIcon from '@mui/icons-material/Api';
-import BasicMenubar from './BasicMenubar';
+import BasicMenubar from './basic-menubar';
+import Drawer from './drawer';
 
 const pages = ['products', 'pricing', 'blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -43,7 +44,8 @@ export default function Navbar() {
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ApiIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Drawer />
+          <ApiIcon sx={{  mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -51,7 +53,7 @@ export default function Navbar() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -61,8 +63,7 @@ export default function Navbar() {
           >
             PLUMS
           </Typography>
-          <ApiIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -78,9 +79,9 @@ export default function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+            PLUMS
+          </Typography> */}
+          <Box className="hidden md:flex" sx={{ flexGrow: 1, justifyContent: 'center' }}>
             <BasicMenubar />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
