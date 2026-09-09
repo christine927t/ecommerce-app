@@ -3,6 +3,7 @@ import Banner from '../components/navbar/banner'
 import Navbar from '../components/navbar/navbar'
 import ColorCarousel from '../components/homepage/color-carousel'
 import HeroBanner from '../components/homepage/hero-banner'
+import ShopByCategory from '../components/homepage/shop-by-category';
 
 export default function Home() {
     return (
@@ -11,6 +12,7 @@ export default function Home() {
             <Navbar />
             <ColorCarousel />
             <HeroBanner />
+            <ShopByCategory />
         </>
     )
 }
