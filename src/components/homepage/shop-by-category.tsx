@@ -13,23 +13,25 @@ images.forEach((image) => {
     })
 })
 
-console.log("shopByImages:", shopByImages);
-console.log("categories:", categories);
+// console.log("shopByImages:", shopByImages);
+// console.log("categories:", categories);
 
 export default function ShopByCategory() {
     return (
-        <div className="mt-[40px]">
+        <section className="mt-[40px] px-4">
             <p className="text-[17px] font-semibold">FIGS By Category</p>
-            <div className="mt-[24px] flex flex-wrap gap-3">
+            <div className="mt-[24px] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
                 {categories.map((category, index) => {
                     return (
-                        <div key={'category-container-' + index} className="grow">
-                            <img key={'category-' + index} src={category.src} alt={'Image for ' + category.name} className="object-cover" />
-                            <p key={'category-name-' + index}>{category.name}</p>
+                        <div key={'category-container-' + index} className="">
+                            <img key={'category-' + index} src={category.src} alt={'Image for ' + category.name} className="object-cover rounded-md" />
+                            <div className="mt-2"> 
+                                <p className="text-sm uppercase" key={'category-name-' + index}>{category.name}</p>
+                            </div>
                         </div>
                     )
                 })}
             </div>
-        </div>
+        </section>
     )
 }

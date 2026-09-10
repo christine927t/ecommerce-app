@@ -5,17 +5,14 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ApiIcon from '@mui/icons-material/Api';
 import BasicMenubar from './basic-menubar';
 import Drawer from './drawer';
 
-const pages = ['products', 'pricing', 'blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Navbar() {
@@ -47,23 +44,25 @@ export default function Navbar() {
           <Drawer />
           <div className="flex items-center">
             <ApiIcon sx={{  mr: 1 }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              PLUMS
-            </Typography>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  borderBottom: 'none',
+                  paddingBottom: '0'
+                }}
+              >
+                PLUMS
+              </Typography>
           </div>
           {/* Shopping links */}
           <Box className="hidden md:flex" sx={{ flexGrow: 1, justifyContent: 'center' }}>

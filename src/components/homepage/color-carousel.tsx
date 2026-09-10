@@ -18,7 +18,7 @@ images.forEach((image) => {
 
 export default function ColorCarousel() {
     return (
-        <div className="flex gap-[16px] mt-[24px] mx-auto px-[24px] max-w-[1200px] overflow-hidden">
+        <div className="flex gap-[16px] mt-[24px] mx-auto px-[24px] max-w-[1200px] overflow-scroll scrollbar-none">
             {colors.map((color, index) => {
                 return (
                     <div key={'color-container-' + color.name} className="flex flex-col gap-2 min-h-[200px]">
