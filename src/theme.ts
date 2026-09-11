@@ -12,4 +12,16 @@ export const theme = createTheme({
   typography: {
     fontFamily: 'Roboto',
   },
+  components: {
+    // Name of the component
+    MuiAccordion: {
+      styleOverrides: {
+        // Name of the slot
+        heading: {
+          // Some CSS
+          margin: '0px',
+        },
+      },
+    },
+  },
 });

@@ -27,8 +27,8 @@ images.forEach((image, index) => {
     })
 })
 
-console.log("picksImages:", picksImages);
-console.log("picks:", picks);
+// console.log("picksImages:", picksImages);
+// console.log("picks:", picks);
 
 export default function PicksForYou() {
     return (
