@@ -37,13 +37,14 @@ export default function Navbar() {
   return (
     <AppBar sx={{
       position: 'relative',
-      boxShadow: "none"
+      boxShadow: "none",
+      backgroundColor: '#ffffff'
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Drawer />
           <div className="flex items-center">
-            <ApiIcon sx={{  mr: 1 }} />
+            <ApiIcon sx={{ mr: 1, color: '#000000' }} />
               <Typography
                 variant="h6"
                 noWrap
@@ -55,7 +56,7 @@ export default function Navbar() {
                   fontFamily: 'monospace',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
-                  color: 'inherit',
+                  color: '#000000',
                   textDecoration: 'none',
                   borderBottom: 'none',
                   paddingBottom: '0'

@@ -27,12 +27,9 @@ images.forEach((image, index) => {
     })
 })
 
-// console.log("picksImages:", picksImages);
-// console.log("picks:", picks);
-
 export default function PicksForYou() {
     return (
-        <section className="mt-10 ps-4">
+        <section className="mt-10 ps-4 mb-10">
             <p className="text-[17px] font-bold mb-6">Picks for You</p>
             <div className="flex gap-4 overflow-scroll scrollbar-none">
                 {picks.map((pick, index) => {

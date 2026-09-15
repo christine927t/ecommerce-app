@@ -1,9 +1,21 @@
-import axios from 'axios'
-export const api = axios.create({ baseURL: '/' })
-export const fetchProducts = () => 
-    axios.get('https://jsonfakery.com/products/random/50')
-    .then(res => res.data)
+const API_URL = 'http://localhost:3000'
 
-//get individual product data for PDP
-// export const fetchProduct = (id: string) => 
-//     axios.get(`https://dummyjson.com/products(${id})`).then(res => res.data)
+export const fetchProducts = async () => {
+    const response = await fetch(`${API_URL}/products`)
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch products')
+    }
+
+    return response.json()
+}
+
+export const fetchCategories = async () => {
+    const response = await fetch(`${API_URL}/categories`)
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch categories')
+    }
+
+    return response.json()
+}

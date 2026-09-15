@@ -4,7 +4,7 @@ type FooterLinksDesktopProps = {
     className?: string;
 };
 
-console.log(FOOTER_LINKS_DATA)
+// console.log(FOOTER_LINKS_DATA)
 
 export default function FooterLinksDesktop({ className }: FooterLinksDesktopProps){
     return (

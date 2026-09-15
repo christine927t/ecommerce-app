@@ -51,7 +51,7 @@ export default function TemporaryDrawer() {
 
   return (
     <div className="block md:hidden cursor-pointer">
-      <DragHandleIcon onClick={toggleDrawer(true)}></DragHandleIcon>
+      <DragHandleIcon onClick={toggleDrawer(true)} sx={{fill: '#000000'}}></DragHandleIcon>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>

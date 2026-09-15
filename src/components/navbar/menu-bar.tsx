@@ -37,7 +37,7 @@ export function MenuRoot(props: React.ComponentProps<typeof Menu.Root>) {
 
 const StyledTrigger = styled(Button)(({ theme }) => ({
   paddingInline: theme.spacing(2),
-  color: '#ffffff',
+  color: '#000000',
   fontWeight: 700,
   transition: 'none',
   textTransform: 'capitalize',
@@ -47,7 +47,7 @@ const StyledTrigger = styled(Button)(({ theme }) => ({
   fontSize: '0.875rem',
   borderBottom: '5px solid transparent',
   '&[data-popup-open]': {
-    borderBottom: '5px solid #ffffff',
+    borderBottom: '5px solid #000000',
   },
   '&.Mui-focusVisible': {
     backgroundColor: (theme.vars || theme).palette.action.focus,
