@@ -1,8 +1,8 @@
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PinterestIcon from '@mui/icons-material/Pinterest';
-import FooterLinksMobile from './linksMobile';
-import FooterLinksDesktop from './linksDesktop';
+import FooterLinksMobile from './LinksMobile';
+import FooterLinksDesktop from './LinksDesktop';
 
 export default function Footer() {
     return (

@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProductBySlug } from '../services/api';
 import type { Product } from '../types/product'
+import Breadcrumbs from '../components/productDetails/Breadcrumbs';
 
 export default function ProductDetails() {
     const { slug } = useParams<{ slug: string }>();
@@ -36,12 +37,21 @@ export default function ProductDetails() {
     }
 
     return (
- 
-        <div>
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <p>{product.price}</p>
-            <p>Category: {product.category.name}</p>
+        <div className="flex flex-col md:flex-row">
+            <div>
+                <section className="px-4">
+                    <Breadcrumbs category={product.category} />
+                    <p className="md:hidden text-[17px] font-semibold mb-2">{product.name}</p>
+                    <p className="md:hidden text-[16px] font-semibold mb-3">${Number(product.price).toFixed(2)}</p>
+                </section>
+                <section>
+                    <img className="object-cover" src={product.imageUrl} alt={`Image for ` + product.name} />
+                </section>
+            </div>
+            <div className="hidden md:block">
+                <p className="text-[17px] font-semibold mb-2">{product.name}</p>
+                <p className="text-[16px] font-semibold mb-3">${Number(product.price).toFixed(2)}</p>
+            </div>
         </div>
     )
 }

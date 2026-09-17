@@ -10,8 +10,8 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ApiIcon from '@mui/icons-material/Api';
-import BasicMenubar from './basic-menubar';
-import Drawer from './drawer';
+import BasicMenubar from './BasicMenubar';
+import Drawer from './Drawer';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 

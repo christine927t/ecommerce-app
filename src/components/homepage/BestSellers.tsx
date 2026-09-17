@@ -7,7 +7,7 @@ export default function BestSellers() {
             <div className="md:order-1 md:bg-[#e5e7ee] md:px-6">
                 <p className="text-[32px] font-bold mt-12 mb-8">BEST SELLERS</p>
                 <p className="mb-4 font-extralight text-[14px] w-2/3 md:w-full m-auto leading-7">The most Awesome to ever do it. Forever-favorite styles and silhouettes—appropriately hyped, undeniably iconic.</p>
-                <Link to="/products" className="text-[13px] font-semibold">
+                <Link to="/products" className="text-[13px] font-semibold pb-[4px]">
                     SHOP NOW
                 </Link>
             </div>

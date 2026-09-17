@@ -10,7 +10,7 @@ import {
   MenuSeparator,
   MenuSubmenuRoot,
   MenuSubmenuTrigger,
-} from './menu-bar';
+} from './MenuBar';
 
 import '../../styles/basic-menubar.css'
 

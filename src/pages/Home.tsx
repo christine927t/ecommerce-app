@@ -1,8 +1,8 @@
-import ColorCarousel from '../components/homepage/color-carousel'
-import HeroBanner from '../components/homepage/hero-banner'
-import ShopByCategory from '../components/homepage/shop-by-category';
-import BestSellers from '../components/homepage/best-sellers';
-import PicksForYou from '../components/homepage/picks-for-you';
+import ColorCarousel from '../components/homepage/ColorCarousel'
+import HeroBanner from '../components/homepage/HeroBanner'
+import ShopByCategory from '../components/homepage/ShopByCategory';
+import BestSellers from '../components/homepage/BestSellers';
+import PicksForYou from '../components/homepage/PicksForYou';
 
 export default function Home() {
     return (

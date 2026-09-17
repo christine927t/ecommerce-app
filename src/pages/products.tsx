@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import type { Product, Category } from '../types/product'
 import ProductCard from '../components/products/ProductCard'
-import '../styles/products.css'
 
 export default function Products() {
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
@@ -70,7 +69,7 @@ export default function Products() {
             ) : (
                 <div className="flex flex-wrap gap-4">
                     {filteredProducts.map((p) => (
-                        <ProductCard  key={p.id} product={p} />
+                        <ProductCard key={p.id} product={p} />
                     ))}
                 </div>
             )}

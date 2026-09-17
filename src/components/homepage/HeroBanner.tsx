@@ -1,6 +1,6 @@
 import heroGifMobile from "/src/assets/homepage/Mobile-Hero-W-1.gif"
 import heroGifDesktop from "/src/assets/homepage/Desktop_Hero_W_1.webp"
-import ShopNowCTA from "./shop-now-cta"
+import ShopNowCTA from "./ShopNowCta"
 
 export default function HeroBanner() {
     return (
