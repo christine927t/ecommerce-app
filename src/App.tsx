@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Banner from '/src/components/navbar/banner.tsx'
 import Navbar from '/src/components/navbar/navbar.tsx'
 import Footer from '/src/components/footer/footer.tsx'
-import Products from './pages/products.tsx';
+import Products from './pages/Products.tsx';
 import ProductDetails from './pages/ProductDetails.tsx';
 
 import "/src/App.css";
