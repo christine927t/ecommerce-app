@@ -55,15 +55,31 @@ export default function ProductDetails() {
                         <img className="object-cover" src={product.imageUrl} alt={`Image for ` + product.name} />
                     </section>
                 </div>
-                <div className="hidden md:block md:w-1/3">
-                    <p className="text-[17px] md:text-[28px] md:leading-[1.5] font-semibold mb-2">{product.name}</p>
-                    <p className="text-[16px] md:text-[18px] font-semibold mb-3">${Number(product.price).toFixed(2)}</p>
+                <div className="md:w-1/3">
+                    <p className="hidden md:block text-[17px] md:text-[28px] md:leading-[1.5] font-semibold mb-2">{product.name}</p>
+                    <p className="hidden md:block text-[16px] md:text-[18px] font-semibold mb-3">${Number(product.price).toFixed(2)}</p>
+                    <div className="flex justify-between items-center">
+                        <p className="text-[12px]">
+                            <span className="font-semibold">Color:</span> Moss
+                        </p>
+                        <Button 
+                            onClick={()=> setOpen(true)} 
+                            sx={{
+                                textTransform: "none", 
+                                color: "#000000", 
+                                fontWeight: "normal", 
+                                fontSize: "12px",
+                                borderBottom: "1px solid #000000",
+                                borderRadius: "0px",
+                                padding: "0px",
+                                lineHeight: '.8'
+                            }}>
+                                Color Gallery
+                            </Button>
+                        <CoreColorsModal open={open} onClose={() => setOpen(false)}/>
+                    </div>
                 </div>
-                <div className="flex justify-between">
-                    <p>Color: Moss</p>
-                    <Button onClick={()=> setOpen(true)}>Color gallery</Button>
-                    <CoreColorsModal open={open} onClose={() => setOpen(false)}/>
-                </div>
+
             </div>
         </div>
     )
