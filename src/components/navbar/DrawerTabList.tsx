@@ -2,28 +2,10 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import CustomTabPanel from './CustomTabPanel';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      tabIndex={0}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
+type DrawerListProps = {
+  onCloseDrawer: () => void;
 }
 
 function a11yProps(index: number) {
@@ -33,7 +15,18 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+function tabSx(){
+  return { 
+      fontWeight: 'bold',
+      fontSize: '1rem',
+      textTransform: 'none',
+      '&.Mui-selected': {
+          color: '#282828',
+      }
+  }
+}
+
+export default function BasicTabs({ onCloseDrawer }: DrawerListProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -42,45 +35,36 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', paddingLeft: '1rem', height: '60px' }}>
         <Tabs 
             value={value} 
             onChange={handleChange} 
             aria-label="basic tabs example" 
             sx={{ 
-                '&.MuiTabs-indicator': {
-                    'backgroundColor': '#282828'
-                }
+              height: '100%',
+              '& .MuiTabs-indicator': {
+                  'backgroundColor': '#282828',
+                  'height': '5px'
+              },
+              '& .MuiTabs-list': {
+                height: '100%'
+              }
             }}
         >
             <Tab 
                 label="Women" 
                 {...a11yProps(0)} 
-                sx={{ 
-                    fontWeight: 'bold',
-                    '&.Mui-selected': {
-                        color: '#282828',
-                    }
-                }}
+                sx={tabSx}
             />
             <Tab 
                 label="Men" 
-                {...a11yProps(0)} 
-                sx={{ 
-                    fontWeight: 'bold',
-                    '&.Mui-selected': {
-                        color: '#282828',
-                    }
-                }}
+                {...a11yProps(1)} 
+                sx={tabSx}
             />        
           </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        Women
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        Men
-      </CustomTabPanel>
+      <CustomTabPanel index={0} value={value} onCloseDrawer={onCloseDrawer} />
+      <CustomTabPanel index={1} value={value} onCloseDrawer={onCloseDrawer}  />
     </Box>
   );
 }

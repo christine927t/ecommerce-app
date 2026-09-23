@@ -16,7 +16,7 @@ export default function TemporaryDrawer() {
   const DrawerList = (
     <Box sx={{ width: "100%" }} role="presentation">
       <div className="flex justify-between items-center">
-        <DrawerTabList />
+        <DrawerTabList onCloseDrawer={toggleDrawer(false)} />
         <IconButton
               aria-label="close"
               onClick={toggleDrawer(false)}
