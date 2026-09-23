@@ -52,7 +52,7 @@ export default function CustomTabPanel({ index, value, onCloseDrawer }: TabPanel
                         <Link to="/products" onClick={onCloseDrawer} className="text-[14px] font-light py-1">Men's Home</Link>
                     )}
                     {highlightLinks.map((highlightLink, index) => (
-                    <Link key={index} to="/products" onClick={onCloseDrawer} className="text-[14px] font-light py-1">{highlightLink}</Link>
+                        <Link key={index} to="/products" onClick={onCloseDrawer} className="text-[14px] font-light py-1">{highlightLink}</Link>
                     ))}
                 </div>
             </Box>
