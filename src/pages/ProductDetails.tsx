@@ -12,6 +12,7 @@ import { limitedEditionHex } from "../constants/coreColors"
 import SizeSelection from '../components/productDetails/SizeSelection';
 import QuantitySelect from '../components/productDetails/QuantitySelect';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import DetailsTabs from '../components/productDetails/DetailsTabs';
 
 export default function ProductDetails() {
     const { slug } = useParams<{ slug: string }>();
@@ -66,7 +67,7 @@ export default function ProductDetails() {
                 <div className="md:w-1/3">
                     <p className="hidden md:block text-[17px] md:text-[28px] md:leading-[1.5] font-semibold mb-2">{product.name}</p>
                     <p className="hidden md:block text-[16px] md:text-[18px] font-semibold mb-3">${Number(product.price).toFixed(2)}</p>
-                    <section className="p-4 md:p-0">
+                    <section className="p-4 md:px-0">
                         <div className="flex justify-between items-center">
                             <p className="text-[12px]">
                                 <span className="font-semibold">Color:</span> {selectedColor}
@@ -94,10 +95,9 @@ export default function ProductDetails() {
                         <div>
                             <SizeSelection />
                         </div>
-  
                     </section>
-                    <section className="">
-                        <div className="p-4 flex gap-1 border-t">
+                    <section className="border-t border-b border-[#e6e6e6] md:border-t-0">
+                        <div className="px-4 py-5 md:px-0 md:pt-0 flex gap-1">
                             <QuantitySelect />
                             <Button 
                                 variant="contained"
@@ -106,15 +106,21 @@ export default function ProductDetails() {
                                 sx={{
                                     fontSize: '12px',
                                     lineHeight: '1.5',
-                                    backgroundColor: '#56584c',
+                                    backgroundColor: '#24323f',
+                                    boxShadow: 'none',
+                                    width: '100%',
                                     '&:hover': {
-                                        backgroundColor: '#56584cd9',
+                                        backgroundColor: '#24323fd9',
+                                        boxShadow: 'none',
                                     }
                                 }}
                             >
                                 ADD TO BAG
                             </Button>
                         </div>
+                    </section>
+                    <section className="bg-[#f5f5f5] p-4">
+                        <DetailsTabs />
                     </section>
                 </div>
 

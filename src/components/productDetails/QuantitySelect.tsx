@@ -22,6 +22,11 @@ export default function QuantitySelect() {
           displayEmpty
           inputProps={{ 'aria-label': 'Qty select' }}
           className="h-[50px]"
+          sx={{
+              '&:MuiOutlinedInput-notchedOutline': {
+                borderColor: '#e6e6e6'
+              }
+          }}
         >
             {quantities.map((quantity, index) => (
                 <MenuItem key={index} value={quantity}>{quantity}</MenuItem>
