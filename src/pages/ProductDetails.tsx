@@ -52,7 +52,7 @@ export default function ProductDetails() {
     }
 
     return (
-        <div className="md:px-10">
+        <div className="md:px-10 mb-10">
             <Breadcrumbs category={product.category} />
             <div className="flex flex-col md:flex-row md:gap-6">
                 <div className='md:w-2/3'>
@@ -96,7 +96,7 @@ export default function ProductDetails() {
                             <SizeSelection />
                         </div>
                     </section>
-                    <section className="border-t border-b border-[#e6e6e6] md:border-t-0">
+                    <section className="border-t border-b border-[#e6e6e6] md:border-t-0 mb-4">
                         <div className="px-4 py-5 md:px-0 md:pt-0 flex gap-1">
                             <QuantitySelect />
                             <Button 
@@ -119,7 +119,7 @@ export default function ProductDetails() {
                             </Button>
                         </div>
                     </section>
-                    <section className="bg-[#f5f5f5] p-4">
+                    <section className="bg-[#f5f5f5] p-4 rounded-sm">
                         <DetailsTabs />
                     </section>
                 </div>

@@ -3,6 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import DetailsTabDetails from './DetailsTabDetails';
+import DetailsTabFit from './DetailsTabFit';
+import DetailsTabFabric from './DetailsTabFabric';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -93,10 +95,10 @@ export default function BasicTabs() {
         <DetailsTabDetails />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Fit
+        <DetailsTabFit />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Fabric
+        <DetailsTabFabric />   
       </CustomTabPanel>
     </Box>
   );
