@@ -46,12 +46,12 @@ describe('Cart', () => {
         ).toBeInTheDocument()
 
         expect(
-            screen.getByText('Color: Moss')
+            screen.getByText('S • Moss')
         ).toBeInTheDocument()
 
-        expect(
-            screen.getByText('Size: S')
-        ).toBeInTheDocument()
+        // expect(
+        //     screen.getByText('S')
+        // ).toBeInTheDocument()
 
         expect(
             screen.getByRole('combobox', { name: 'Qty select' })
@@ -177,8 +177,46 @@ describe('Cart', () => {
         )
 
         expect(
-            screen.getByText('Subtotal: $76.00')
+            screen.getByText('Subtotal:')
+        ).toBeInTheDocument()
+
+        expect(
+            screen.getByText('$76.00')
+        ).toBeInTheDocument()
+    })
+
+    it('sets the free-shipping progress width from the cart subtotal', async () => {
+        const user = userEvent.setup()
+
+        useCartStore.getState().addItem({
+            product: {
+                id: 1,
+                name: 'Catarina Scrub Top',
+                slug: 'catarina-scrub-top',
+                price: '42.00',
+                imageUrl: 'https://example.com/catarina.jpg',
+                categoryId: 1,
+                category: {
+                    id: 1,
+                    name: 'Womens',
+                    slug: 'womens',
+                },
+            },
+            color: 'Moss',
+            size: 'S',
+            quantity: 1,
+        })
+
+        renderCartDrawer()
+
+        await user.click(
+            screen.getByTestId('shopping-bag-icon')
         )
+
+        const shippingMessage = screen.getByText('$8 more for Free Shipping!')
+        const progressBar = shippingMessage.nextElementSibling?.firstElementChild
+
+        expect(progressBar).toHaveStyle({ width: '84%' })
     })
 
     it('calculates the subtotal for multiple items in the cart', async () => {
@@ -229,7 +267,11 @@ describe('Cart', () => {
         )
 
         expect(
-            screen.getByText('Subtotal: $126.00')
+            screen.getByText('Subtotal:')
+        ).toBeInTheDocument()
+
+        expect(
+            screen.getByText('$126.00')
         ).toBeInTheDocument()
     })
 
