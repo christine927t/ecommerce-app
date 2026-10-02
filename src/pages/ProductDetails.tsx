@@ -13,14 +13,21 @@ import SizeSelection from '../components/productDetails/SizeSelection';
 import QuantitySelect from '../components/productDetails/QuantitySelect';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DetailsTabs from '../components/productDetails/DetailsTabs';
+import { useCartStore } from '../store/cartStore';
+import Checkmark from '../assets/checkmark.tsx'
+
 
 export default function ProductDetails() {
     const { slug } = useParams<{ slug: string }>();
 
     const [open, setOpen] = React.useState(false);
-    // const handleOpen = () => setOpen(true);
 
-    const selectedColor = 'Moss';
+    const [selectedColor, setSelectedColor] = React.useState('Moss')
+    const [selectedSize, setSelectedSize] = React.useState('')
+    const [quantity, setQuantity] = React.useState(1)
+
+    const addItem = useCartStore((state) => state.addItem);
+    const [addedToCart, setAddedToCart] = React.useState(false);
 
     const {
         data: product, 
@@ -49,6 +56,26 @@ export default function ProductDetails() {
 
     if (!product) {
         return <p>Product not found.</p>
+    }
+
+    const handleAddToBag = () => {
+        if (!selectedSize) {
+            //add notifcation to user to select a size
+            return
+        }
+
+        addItem({
+            product,
+            color: selectedColor,
+            size: selectedSize,
+            quantity
+        })
+
+        setAddedToCart(true)
+
+        setTimeout(() => {
+            setAddedToCart(false)
+        }, 3000)
     }
 
     return (
@@ -88,21 +115,32 @@ export default function ProductDetails() {
                             </Button>
                             <CoreColorsModal open={open} onClose={() => setOpen(false)}/>
                         </div>
-                        <div className="">
-                            <ColorSelection text="Core" swatches={coreColorsHex} />
-                            <ColorSelection text="Limited Edition" swatches={limitedEditionHex} />
+                        <div>
+                            <ColorSelection 
+                                text="Core" 
+                                swatches={coreColorsHex} 
+                                value={selectedColor} 
+                                onChange={setSelectedColor}
+                            />
+                            <ColorSelection 
+                                text="Limited Edition" 
+                                swatches={limitedEditionHex} 
+                                value={selectedColor} 
+                                onChange={setSelectedColor}
+                            />
                         </div>
                         <div>
-                            <SizeSelection />
+                            <SizeSelection value={selectedSize} onChange={setSelectedSize}/>
                         </div>
                     </section>
                     <section className="border-t border-b border-[#e6e6e6] md:border-t-0 mb-4">
                         <div className="px-4 py-5 md:px-0 md:pt-0 flex gap-1">
-                            <QuantitySelect />
+                            <QuantitySelect value={quantity} onChange={setQuantity} />
                             <Button 
                                 variant="contained"
                                 startIcon={<ShoppingBagIcon />}
                                 className="w-100"
+                                onClick={handleAddToBag}
                                 sx={{
                                     fontSize: '12px',
                                     lineHeight: '1.5',
@@ -115,7 +153,9 @@ export default function ProductDetails() {
                                     }
                                 }}
                             >
-                                ADD TO BAG
+                                ADD TO BAG { addedToCart && (
+                                    <Checkmark />
+                                )}
                             </Button>
                         </div>
                     </section>

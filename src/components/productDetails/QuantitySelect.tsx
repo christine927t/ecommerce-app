@@ -4,20 +4,23 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import type { SelectChangeEvent } from "@mui/material/Select";
 
+type Props = {
+  value: number
+  onChange: (quantity: number) => void
+}
 
-export default function QuantitySelect() {
-  const [qty, setQuantity] = React.useState('1');
+export default function QuantitySelect({ value, onChange }: Props) {
   const quantities = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
   const handleChange = (event: SelectChangeEvent) => {
-    setQuantity(event.target.value as string);
+    onChange(Number(event.target.value))
   };
 
   return (
      <FormControl sx={{ minWidth: 64 }}>
         <Select
           aria-describedby={`Qty-selector-helper-text`}
-          value={qty}
+          value={String(value)}
           onChange={handleChange}
           displayEmpty
           inputProps={{ 'aria-label': 'Qty select' }}

@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { Product } from '../types/product'
 
 export type CartItem = {
@@ -21,57 +22,65 @@ type CartStore = {
     clearCart: () => void
 }
 
-export const useCartStore = create<CartStore>((set) => ({
-    items: [],
-    
-    addItem: (item) =>
-        set((state) => {
-            const existingItem = state.items.find(
-                (existing) =>
-                    existing.product.id === item.product.id &&
-                    existing.color === item.color &&
-                    existing.size === item.size
-            )
+export const useCartStore = create<CartStore>()(
+    persist(
+        (set) => ({
+            items: [],
 
-            if (existingItem) {
-                return {
-                    items: state.items.map((existing) => 
-                        existing === existingItem
-                            ? {
-                                ...existing,
-                                quantity: existing.quantity + item.quantity
-                            } : existing
+            addItem: (item) =>
+                set((state) => {
+                    const existingItem = state.items.find(
+                        (existing) =>
+                            existing.product.id === item.product.id &&
+                            existing.color === item.color &&
+                            existing.size === item.size
                     )
-                }
-            }
 
-            return {
-                items: [...state.items, item],
-            }
-        }),
+                    if (existingItem) {
+                        return {
+                            items: state.items.map((existing) =>
+                                existing === existingItem
+                                    ? {
+                                          ...existing,
+                                          quantity: existing.quantity + item.quantity,
+                                      }
+                                    : existing
+                            ),
+                        }
+                    }
 
-    removeItem: (productId, color, size) =>
-        set((state) => ({
-            items: state.items.filter(
-                (item) =>
-                    !(
+                    return {
+                        items: [...state.items, item],
+                    }
+                }),
+
+            removeItem: (productId, color, size) =>
+                set((state) => ({
+                    items: state.items.filter(
+                        (item) =>
+                            !(
+                                item.product.id === productId &&
+                                item.color === color &&
+                                item.size === size
+                            )
+                    ),
+                })),
+
+            updateQuantity: (productId, color, size, quantity) =>
+                set((state) => ({
+                    items: state.items.map((item) =>
                         item.product.id === productId &&
                         item.color === color &&
                         item.size === size
-                    )
-            )
-        })),
-    
-    updateQuantity: (productId, color, size, quantity) =>
-        set((state) => ({
-            items: state.items.map((item) =>
-                item.product.id === productId &&
-                item.color === color &&
-                item.size === size
-                    ? { ...item, quantity }
-                    : item
-            ),
-        })),
+                            ? { ...item, quantity }
+                            : item
+                    ),
+                })),
 
-    clearCart: () => set({ items: [] })
-}))
+            clearCart: () => set({ items: [] }),
+        }),
+        {
+            name: 'cart-storage',
+        }
+    )
+)

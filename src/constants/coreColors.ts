@@ -57,6 +57,7 @@ export const coreColorsHex: ColorSwatch[] = [
   { name: "Olive", hex: "#56584c" },
   { name: "Navy", hex: "#24323f" },
   { name: "Dark Harbor", hex: "#18455a" },
+  { name: "Moss", hex: "#282828"}
 ]
 
 export const limitedEditionHex: ColorSwatch[] = [

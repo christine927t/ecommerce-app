@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { describe, expect, it, vi } from 'vitest'
 import ProductDetails from './ProductDetails'
 import type { Product } from '../types/product'
+import { useCartStore } from '../store/cartStore'
+import { fetchProductBySlug } from '../services/api'
 
 const product: Product = {
     id: 1,
@@ -40,8 +42,6 @@ vi.mock('../components/productDetails/CoreColorsModal', () => ({
         ): null
 }))
 
-import { fetchProductBySlug } from '../services/api'
-
 const renderProductDetails = () => {
     const queryClient = new QueryClient({
         defaultOptions: {
@@ -64,6 +64,10 @@ const renderProductDetails = () => {
        </QueryClientProvider> 
     )
 }
+
+beforeEach(() => {
+    useCartStore.getState().clearCart()
+})
 
 describe('ProductDetails', () => {
     it('renders the product details', async () =>{
@@ -153,5 +157,70 @@ describe('ProductDetails', () => {
         expect(
             screen.queryByText('Color Gallery Modal')
         ).not.toBeInTheDocument()
+    })
+
+    //cartStore tests
+    it('adds the selected product option to the cart', async() => {
+        vi.mocked(fetchProductBySlug).mockResolvedValue(product)
+
+        const user = userEvent.setup()
+
+        renderProductDetails()
+
+        //wait for the product to load
+        expect(
+            await screen.findAllByText('Catarina Scrub Top')
+        ).toHaveLength(2)
+
+        //Select a color
+        await user.click(
+            screen.getByRole('button', { name: 'Moss' })
+        )
+
+        //Select a size
+        await user.click(
+            screen.getByRole('button', { name: 'XL' })
+        )
+
+        //Change quantity to 3
+        await user.click(
+            screen.getByRole('combobox', { name: 'Qty select' })
+        )
+
+        await user.click(
+            screen.getByRole('option', { name: '3' })
+        )
+
+        //Add the product to the cart
+        await user.click(
+            screen.getByRole('button', { name: 'ADD TO BAG'})
+        )
+
+        const items = useCartStore.getState().items
+        expect(items).toHaveLength(1)
+        expect(items[0]).toMatchObject({
+            product,
+            color: 'Moss',
+            size: 'XL',
+            quantity: 3
+        })
+    })
+
+    it('does not add the product to the cart without a selected size', async () => {
+        vi.mocked(fetchProductBySlug).mockResolvedValue(product)
+
+        const user = userEvent.setup()
+
+        renderProductDetails()
+
+        expect(
+            await screen.findAllByText('Catarina Scrub Top')
+        ).toHaveLength(2)
+
+        await user.click(
+            screen.getByRole('button', { name: 'ADD TO BAG'})
+        )
+
+        expect(useCartStore.getState().items).toHaveLength(0)
     })
 })

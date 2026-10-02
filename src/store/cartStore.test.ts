@@ -103,4 +103,67 @@ describe('cartStore', () => {
         expect(useCartStore.getState().items[0].color).toBe('Moss')
         expect(useCartStore.getState().items[1].color).toBe('Black')
     })
+
+    it('removes an item from the cart', () => {
+        const { addItem, removeItem } = useCartStore.getState()
+
+        addItem({
+            product,
+            color: 'Moss',
+            size: 'Small',
+            quantity: 1
+        })
+
+        addItem({
+            product,
+            color: 'Black',
+            size: 'Medium',
+            quantity: 1
+        })
+
+        removeItem(product.id, 'Moss', 'Small')
+
+        const items = useCartStore.getState().items
+
+        expect(items).toHaveLength(1)
+        expect(items[0].color).toBe('Black')
+        expect(items[0].size).toBe('Medium')
+    })
+
+    it('updates the quantity of a cart item' , () => {
+        const { addItem, updateQuantity } = useCartStore.getState()
+
+        addItem({
+            product,
+            color: 'Moss',
+            size: 'Small',
+            quantity: 1
+        })
+
+        updateQuantity(product.id, 'Moss', 'Small', 4)
+
+        expect(useCartStore.getState().items[0].quantity).toBe(4)  
+    })
+
+    it('clears all items from the cart'), () => {
+        const { addItem, clearCart } = useCartStore.getState()
+
+        addItem({
+            product,
+            color: 'Moss',
+            size: 'Small',
+            quantity: 1
+        })
+
+        addItem({
+            product,
+            color: 'Black',
+            size: 'Medium',
+            quantity: 1
+        })
+
+        clearCart()
+
+        expect(useCartStore.getState().items).toHaveLength(0)
+    }
 })
