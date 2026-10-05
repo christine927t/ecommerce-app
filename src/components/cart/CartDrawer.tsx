@@ -7,6 +7,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import Zoom from '@mui/material/Zoom';
 
 export default function CartDrawer() {
     const [open, setOpen] = React.useState(false);
@@ -42,34 +43,35 @@ export default function CartDrawer() {
                 {items.length === 0 && <p>Your cart is empty.</p>}
 
                 {items.length > 0 && subtotal < 50 && (
-                    <>
-                        <p className="text-[13px] mb-3">
-                            ${50-subtotal} more for Free Shipping!
-                        </p>
-                        <div className="w-full bg-[#e6e6e6] rounded-[4px] h-[6px] relative">
-                            <span
-                                className="absolute top-0 left-0 bg-[#282828] rounded-[4px] h-[6px]"
-                                style={{ width: `${(subtotal / 50) * 100}%` }}
-                            ></span>
+                    <Zoom in={true}>
+                        <div className=" h-[40px]">
+                            <p className="text-[13px] mb-3">
+                                ${50-subtotal} more for Free Shipping!
+                            </p>
+                            <div className="w-full bg-[#e6e6e6] rounded-[4px] h-[6px] relative">
+                                <span
+                                    className="absolute top-0 left-0 bg-[#282828] rounded-[4px] h-[6px]"
+                                    style={{ width: `${(subtotal / 50) * 100}%` }}
+                                ></span>
+                            </div>
                         </div>
-                    </>
+                    </Zoom>
                 )}
 
                 {items.length > 0 && subtotal >= 50 && (
-                    <div className="w-full flex items-center justify-center bg-[#f5f5f5] h-[40px] gap-4">
-                        <div className="flex items-center justify-center bg-[#000000] rounded-full size-[22px]">
-                            <CheckIcon sx={{"fill" : "white", width: "16px", height: "16px" }} />
+                    <Zoom in={true}>
+                        <div className="w-full flex items-center justify-center bg-[#f5f5f5] h-[40px] gap-4">
+                            <div className="flex items-center justify-center bg-[#000000] rounded-full size-[22px]">
+                                <CheckIcon sx={{"fill" : "white", width: "16px", height: "16px" }} />
+                            </div>
+                            <p className="text-[13px] font-semibold">Enjoy FREE Shipping!</p>
                         </div>
-                        <p className="text-[13px] font-semibold">Enjoy FREE Shipping!</p>
-                    </div>
+                    </Zoom>
                 )}
 
                 {items.map((item) => (
-                    <>
-                        <div
-                            className="flex justify-between py-6"
-                            key={`${item.product.id}-${item.color}-${item.size}`}
-                        >
+                    <div key={`${item.product.id}-${item.color}-${item.size}`}>
+                        <div className="flex justify-between py-6">
                             <div className="flex gap-3">
                                 <img src={item.product.imageUrl} alt={item.product.name} className="size-[100px] object-cover"/>
                                 <div className="flex flex-col justify-between">
@@ -109,16 +111,13 @@ export default function CartDrawer() {
                             </div>        
                      
                         </div>
-                      
-                    </>
+                    </div>
                 ))}
                 <div className="border-t border-[#e6e6e6] py-5 flex justify-between font-bold">
                     <p>Subtotal:</p>
                     <p>${subtotal.toFixed(2)}</p>
                 </div>
-               
         </div>
-
     );
 
     return (
