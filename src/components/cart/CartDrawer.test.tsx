@@ -1,12 +1,22 @@
+import * as React from 'react';
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import CartDrawer from './CartDrawer'
 import { useCartStore } from '../../store/cartStore'
 import userEvent from '@testing-library/user-event'
 
-const renderCartDrawer = () => {
-    return render(<CartDrawer />)
+function CartDrawerWrapper() {
+    const [cartOpen, setCartOpen] = React.useState(false);
+
+    return (
+        <CartDrawer
+            cartOpen={cartOpen}
+            onCartOpen={setCartOpen}
+            onCartClose={setCartOpen}
+        />
+    )
 }
+const renderCartDrawer = () => render(<CartDrawerWrapper />)
 
 describe('Cart', () => {
     beforeEach(() => {
@@ -95,7 +105,7 @@ describe('Cart', () => {
         ).toBeInTheDocument()
 
         await user.click(
-            screen.getByRole('button', { name: 'Remove' })
+            screen.getByTestId('remove-item-icon')
         )
 
         expect(

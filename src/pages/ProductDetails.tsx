@@ -14,10 +14,17 @@ import QuantitySelect from '../components/productDetails/QuantitySelect';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DetailsTabs from '../components/productDetails/DetailsTabs';
 import { useCartStore } from '../store/cartStore';
-import Checkmark from '../assets/checkmark.tsx'
+import Checkmark from '../assets/checkmark.tsx';
+import Snackbar from '../components/productDetails/Snackbar.tsx'
+import AddedToCart from '../components/productDetails/AddedToCart.tsx';
 
+type Props= {
+    onViewBag: () => void;
+}
 
-export default function ProductDetails() {
+export default function ProductDetails({ onViewBag }: Props) {
+    const cloudinaryBaseUrl = import.meta.env.VITE_CLOUDINARY_URL;
+
     const { slug } = useParams<{ slug: string }>();
 
     const [open, setOpen] = React.useState(false);
@@ -28,6 +35,9 @@ export default function ProductDetails() {
 
     const addItem = useCartStore((state) => state.addItem);
     const [addedToCart, setAddedToCart] = React.useState(false);
+
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+    const [openAddedToCart, setOpenAddedToCart] = React.useState(false);
 
     const {
         data: product, 
@@ -60,7 +70,7 @@ export default function ProductDetails() {
 
     const handleAddToBag = () => {
         if (!selectedSize) {
-            //add notifcation to user to select a size
+            setOpenSnackbar(true)
             return
         }
 
@@ -76,6 +86,8 @@ export default function ProductDetails() {
         setTimeout(() => {
             setAddedToCart(false)
         }, 3000)
+
+        setOpenAddedToCart(true);
     }
 
     return (
@@ -88,7 +100,7 @@ export default function ProductDetails() {
                         <p className="md:hidden text-[16px] font-semibold mb-3">${Number(product.price).toFixed(2)}</p>
                     </section>
                     <section>
-                        <img className="object-cover" src={product.imageUrl} alt={`Image for ` + product.name} />
+                        <img className="object-cover" src={`${cloudinaryBaseUrl}${product.imageUrl}`} alt={`Image for ` + product.name} />
                     </section>
                 </div>
                 <div className="md:w-1/3">
@@ -165,6 +177,15 @@ export default function ProductDetails() {
                 </div>
 
             </div>
+            <Snackbar openSnackbar={openSnackbar} onClose={() => setOpenSnackbar(false)}/>
+            <AddedToCart 
+                openAddedToCart={openAddedToCart} 
+                onClose={() => setOpenAddedToCart(false)}
+                product={product}
+                selectedColor={selectedColor}
+                selectedSize={selectedSize} 
+                onViewBag={onViewBag}
+            />
         </div>
     )
 }

@@ -53,7 +53,10 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-type Props = { open: boolean; onClose: () => void };
+type Props = { 
+    open: boolean; 
+    onClose: () => void 
+};
 
 export default function CoreColorsModal({ open, onClose }: Props) {
     const theme = useTheme();

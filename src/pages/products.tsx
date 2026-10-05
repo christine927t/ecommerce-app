@@ -30,6 +30,15 @@ export default function Products() {
         queryFn: fetchCategories
     })
 
+    const buttonSx = {
+        border: 'none',
+        fontSize: '13px',
+        fontWeight: '600',
+        color: '#282828',
+        padding: '0px',
+        minWidth: 'unset'
+    }
+
     const filteredProducts = 
         selectedCategory === null
             ? products
@@ -39,24 +48,35 @@ export default function Products() {
 
     return (
         <Container className="py-8">
-            <header className="mb-8">
-                <Button
-                    variant={selectedCategory === null ? 'contained' : 'outlined'}
-                    onClick={() => setSelectedCategory(null)}
-                >
-                    All
-                </Button>
-
-                {categories.map((category) => (
+            <header className="mb-8 flex justify-center gap-10">
+                <div className="relative">
                     <Button
-                        key={category.id}
-                        variant={
-                            selectedCategory === category.id ? 'contained' : 'outlined'
-                        }
-                        onClick={() => setSelectedCategory(category.id)}
+                        onClick={() => setSelectedCategory(null)}
+                        sx={buttonSx}
                     >
-                        {category.name}
+                        All
                     </Button>
+                    <>
+                        {selectedCategory === null && (
+                            <span className="h-[2px] absolute w-[100%] bottom-0 left-0 bg-[#282828]"></span>
+                        )}
+                    </>
+                </div>
+
+                {categories.map((category) => (   
+                    <div key={category.id} className="relative">
+                        <Button
+                            onClick={() => setSelectedCategory(category.id)}
+                            sx={buttonSx}
+                        >
+                            {category.name}
+                        </Button>
+                        <>
+                            {selectedCategory === category.id && (
+                                <span className="h-[2px] absolute w-[100%] bottom-0 left-0 bg-[#282828]"></span>
+                            )}
+                        </>
+                    </div>
                 ))}
             </header>
 

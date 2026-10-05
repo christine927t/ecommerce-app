@@ -64,7 +64,7 @@ export default function BasicTabs({ onCloseDrawer }: DrawerListProps) {
           </Tabs>
       </Box>
       <CustomTabPanel index={0} value={value} onCloseDrawer={onCloseDrawer} />
-      <CustomTabPanel index={1} value={value} onCloseDrawer={onCloseDrawer}  />
+      <CustomTabPanel index={1} value={value} onCloseDrawer={onCloseDrawer} />
     </Box>
   );
 }

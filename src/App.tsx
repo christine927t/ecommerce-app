@@ -11,15 +11,20 @@ import ProductDetails from './pages/ProductDetails.tsx';
 import "/src/App.css";
 
 export default function App() {
+  const [cartOpen, setCartOpen] = React.useState(false);
   return (
     <>
       <BrowserRouter>
         <Banner />
-        <Navbar />
+        <Navbar 
+          cartOpen={cartOpen} 
+          onCartOpen={() => setCartOpen(true)} 
+          onCartClose={() => setCartOpen(false)} 
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/products/:slug" element={<ProductDetails />} />
+          <Route path="/products/:slug" element={<ProductDetails onViewBag={() => setCartOpen(true)} />} />
         </Routes>
         <Footer />
       </BrowserRouter>

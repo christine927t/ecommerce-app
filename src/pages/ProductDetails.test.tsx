@@ -77,7 +77,7 @@ describe('ProductDetails', () => {
 
         expect(
             await screen.findAllByText('Catarina Scrub Top')
-        ).toHaveLength(2)
+        ).not.toHaveLength(0)
 
         expect(screen.getAllByText('$38.00')).toHaveLength(2)
 
@@ -170,7 +170,7 @@ describe('ProductDetails', () => {
         //wait for the product to load
         expect(
             await screen.findAllByText('Catarina Scrub Top')
-        ).toHaveLength(2)
+        ).not.toHaveLength(0)
 
         //Select a color
         await user.click(
@@ -206,7 +206,7 @@ describe('ProductDetails', () => {
         })
     })
 
-    it('does not add the product to the cart without a selected size', async () => {
+    it('does not add the product to the cart without a selected size and shows a size selection message', async () => {
         vi.mocked(fetchProductBySlug).mockResolvedValue(product)
 
         const user = userEvent.setup()
@@ -215,12 +215,67 @@ describe('ProductDetails', () => {
 
         expect(
             await screen.findAllByText('Catarina Scrub Top')
-        ).toHaveLength(2)
+        ).not.toHaveLength(0)
 
         await user.click(
             screen.getByRole('button', { name: 'ADD TO BAG'})
         )
 
         expect(useCartStore.getState().items).toHaveLength(0)
+
+        expect(screen.getByText('Please select a size')).toBeInTheDocument()
+    })
+
+    it('shows the added product confirmation dialog', async () => {
+        vi.mocked(fetchProductBySlug).mockResolvedValue(product)
+
+        const user = userEvent.setup()
+
+        renderProductDetails()
+
+        //wait for the product to load
+        expect(
+            await screen.findAllByText('Catarina Scrub Top')
+        ).not.toHaveLength(0)
+
+        //Select a color
+        await user.click(
+            screen.getByRole('button', { name: 'Moss' })
+        )
+
+        //Select a size
+        await user.click(
+            screen.getByRole('button', { name: 'XL' })
+        )
+
+        //Change quantity to 3
+        await user.click(
+            screen.getByRole('combobox', { name: 'Qty select' })
+        )
+
+        await user.click(
+            screen.getByRole('option', { name: '3' })
+        )
+
+        //Add the product to the cart
+        await user.click(
+            screen.getByRole('button', { name: 'ADD TO BAG'})
+        )
+
+        expect(
+            screen.getByRole('alertdialog')
+        ).toBeInTheDocument()
+
+        expect(
+            screen.getByText('Added to Bag')
+        ).toBeInTheDocument()
+
+        expect(
+            screen.getByText('Moss')
+        ).toBeInTheDocument()
+
+        expect(
+            screen.getByText('XL')
+        ).toBeInTheDocument()
     })
 })

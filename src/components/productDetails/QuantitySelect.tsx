@@ -24,7 +24,7 @@ export default function QuantitySelect({ value, onChange }: Props) {
           onChange={handleChange}
           displayEmpty
           inputProps={{ 'aria-label': 'Qty select' }}
-          className="h-[50px]"
+          className="h-[50px] w-[64px]"
           sx={{
               '&:MuiOutlinedInput-notchedOutline': {
                 borderColor: '#e6e6e6'

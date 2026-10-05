@@ -9,12 +9,17 @@ import BasicMenubar from './BasicMenubar';
 import Drawer from './Drawer';
 import CartDrawer from '../cart/CartDrawer';
 
-export default function Navbar() {
-  const [open, setOpen] = React.useState(false);
+type Props= {
+  cartOpen: boolean
+  onCartOpen: (value: boolean) => void
+  onCartClose: (value: boolean) => void
+}
+export default function Navbar({ cartOpen, onCartOpen, onCartClose }: Props) {
+  // const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-      setOpen(newOpen);
-  };
+  // const toggleDrawer = (newOpen: boolean) => () => {
+  //     setOpen(newOpen);
+  // };
   
   return (
     <AppBar sx={{
@@ -51,7 +56,7 @@ export default function Navbar() {
           <Box className="hidden md:flex" sx={{ flexGrow: 1, justifyContent: 'center' }}>
             <BasicMenubar />
           </Box>
-          <CartDrawer open={open} onClose={toggleDrawer(false)} />
+          <CartDrawer cartOpen={cartOpen} onCartOpen={onCartOpen} onCartClose={onCartClose} />
         </Toolbar>
       </Container>
     </AppBar>

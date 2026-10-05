@@ -7,10 +7,16 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Zoom from '@mui/material/Zoom';
 
-export default function CartDrawer() {
-    const [open, setOpen] = React.useState(false);
+type Props= {
+    cartOpen: boolean
+    onCartOpen: (value: boolean) => void
+    onCartClose: (value: boolean) => void
+}
+
+export default function CartDrawer({ cartOpen, onCartOpen, onCartClose }: Props) {
     const items = useCartStore((state) => state.items)
     const removeItem = useCartStore((state) => state.removeItem)
     const updateQuantity = useCartStore((state) => state.updateQuantity)
@@ -22,7 +28,8 @@ export default function CartDrawer() {
     )
 
     const toggleDrawer = (newOpen: boolean) => () => {
-        setOpen(newOpen);
+        if (newOpen) onCartOpen(newOpen);
+        else onCartClose(newOpen)
     };
 
     const DrawerList = (
@@ -71,7 +78,7 @@ export default function CartDrawer() {
 
                 {items.map((item) => (
                     <div key={`${item.product.id}-${item.color}-${item.size}`}>
-                        <div className="flex justify-between py-6">
+                        <div className="flex justify-between py-6 border-b border-[#e6e6e6]">
                             <div className="flex gap-3">
                                 <img src={item.product.imageUrl} alt={item.product.name} className="size-[100px] object-cover"/>
                                 <div className="flex flex-col justify-between">
@@ -97,6 +104,8 @@ export default function CartDrawer() {
                             <div className="flex flex-col justify-between">
                               <button
                                     type="button"
+                                    className="cursor-pointer"
+                                    data-testid="remove-item-icon"
                                     onClick={() =>
                                         removeItem(
                                             item.product.id,
@@ -105,7 +114,7 @@ export default function CartDrawer() {
                                         )
                                     }
                                 >
-                                    Remove
+                                    <DeleteOutlinedIcon />
                                 </button>
                                 <p>${Number(item.product.price).toFixed(2)}</p>
                             </div>        
@@ -113,7 +122,7 @@ export default function CartDrawer() {
                         </div>
                     </div>
                 ))}
-                <div className="border-t border-[#e6e6e6] py-5 flex justify-between font-bold">
+                <div className="py-5 flex justify-between font-bold">
                     <p>Subtotal:</p>
                     <p>${subtotal.toFixed(2)}</p>
                 </div>
@@ -121,7 +130,7 @@ export default function CartDrawer() {
     );
 
     return (
-        <div>
+        <div className="cursor-pointer">
             <ShoppingBagOutlinedIcon 
                 data-testid="shopping-bag-icon"
                 onClick={toggleDrawer(true)} 
@@ -134,7 +143,7 @@ export default function CartDrawer() {
                 )}
             <Drawer 
                 anchor="right" 
-                open={open} 
+                open={cartOpen} 
                 onClose={toggleDrawer(false)} 
                 sx={{ 
                     '& .MuiDrawer-paper': {
