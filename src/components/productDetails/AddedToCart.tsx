@@ -72,7 +72,7 @@ export default function AddedToCart(
                     <div className="flex gap-2 items-center">
                         <p className="text-[20px] font-semibold">Added to Bag</p>
                         <div className="size-[16px] bg-[#285AD3] rounded-full flex items-center justify-center">
-                            <Checkmark />
+                            <Checkmark size="1.625em" />
                         </div>
                     </div>
         

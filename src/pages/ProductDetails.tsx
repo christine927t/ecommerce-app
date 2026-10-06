@@ -14,7 +14,6 @@ import QuantitySelect from '../components/productDetails/QuantitySelect';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DetailsTabs from '../components/productDetails/DetailsTabs';
 import { useCartStore } from '../store/cartStore';
-import Checkmark from '../assets/checkmark.tsx';
 import Snackbar from '../components/productDetails/Snackbar.tsx'
 import AddedToCart from '../components/productDetails/AddedToCart.tsx';
 
@@ -165,9 +164,7 @@ export default function ProductDetails({ onViewBag }: Props) {
                                     }
                                 }}
                             >
-                                ADD TO BAG { addedToCart && (
-                                    <Checkmark />
-                                )}
+                                ADD TO BAG
                             </Button>
                         </div>
                     </section>

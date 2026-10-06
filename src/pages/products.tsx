@@ -47,7 +47,13 @@ export default function Products() {
             )
 
     return (
-        <Container className="py-8">
+        <Container 
+            className="" 
+            sx={{
+                py: 4,
+                px: { xs: 0, md: 0 }    
+            }}
+        >
             <header className="mb-8 flex justify-center gap-10">
                 <div className="relative">
                     <Button
@@ -87,7 +93,7 @@ export default function Products() {
             ) : error ? (
                 <div className="text-center text-red-600 py-8">{error.message}</div>
             ) : (
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-x-[4px] gap-y-[24px]">
                     {filteredProducts.map((p) => (
                         <ProductCard key={p.id} product={p} />
                     ))}

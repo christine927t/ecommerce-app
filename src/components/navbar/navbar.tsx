@@ -38,7 +38,7 @@ export default function Navbar({ cartOpen, onCartOpen, onCartClose }: Props) {
                 component="a"
                 href="/"
                 sx={{
-                  mr: 2,
+                  marginRight: '0px',
                   display: { xs: 'flex' },
                   fontFamily: 'monospace',
                   fontWeight: 700,

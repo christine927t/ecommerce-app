@@ -130,7 +130,7 @@ export default function CartDrawer({ cartOpen, onCartOpen, onCartClose }: Props)
     );
 
     return (
-        <div className="cursor-pointer">
+        <div className="cursor-pointer md:ml-20">
             <ShoppingBagOutlinedIcon 
                 data-testid="shopping-bag-icon"
                 onClick={toggleDrawer(true)} 
