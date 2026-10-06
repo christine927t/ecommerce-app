@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
-import Banner from '/src/components/navbar/banner.tsx'
-import Navbar from '/src/components/navbar/navbar.tsx'
-import Footer from '/src/components/footer/footer.tsx'
+import Banner from '/src/components/navbar/Banner.tsx'
+import Navbar from '/src/components/navbar/Navbar.tsx'
+import Footer from '/src/components/footer/Footer.tsx'
 import Products from './pages/Products.tsx';
 import ProductDetails from './pages/ProductDetails.tsx';
 
