@@ -3,14 +3,14 @@ const colorCarousel = import.meta.glob('/src/assets/color-carousel/*.{webp, avif
     import: 'default'
 }) as Record<string, string>;
 
-const images = Object.values(colorCarousel);
-const colors: any[] = [];
+const colors = Object.entries(colorCarousel).map(([path, src])=> {
+    const filename = path.split('/').pop() ?? '';
+    const name = filename.replace(/\.(webp|avif)$/i, '');
 
-images.forEach((image) => {
-    colors.push({
-        name: image.split('/').pop().substring(0, image.split('/').pop().length - 5).replaceAll('-', ' '),
-        src: image
-    })
+    return {
+        name: name.replaceAll('-', ''),
+        src
+    }
 })
 
 export default function ColorCarousel() {

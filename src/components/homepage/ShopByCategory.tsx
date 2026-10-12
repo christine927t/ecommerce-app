@@ -3,18 +3,15 @@ const shopByImages = import.meta.glob('/src/assets/shop-by-category/*.webp', {
     import: 'default'
 }) as Record<string, string>;
 
-const images = Object.values(shopByImages);
-const categories: any[] = [];
+const categories = Object.entries(shopByImages).map(([path, src])=> {
+    const filename = path.substring(48) ?? '';
+    const name = filename.replace(/\.(webp|avif)$/i, '');
 
-images.forEach((image) => {
-    categories.push({
-        name: image?.substring(48).replaceAll('_', ' ').replaceAll('.webp', ''),
-        src: image
-    })
+    return {
+        name: name.replaceAll('_', ' '),
+        src
+    }
 })
-
-// console.log("shopByImages:", shopByImages);
-// console.log("categories:", categories);
 
 export default function ShopByCategory() {
     return (
