@@ -13,9 +13,6 @@ images.forEach((image) => {
     })
 })
 
-// console.log(colorCarousel)
-// console.log(colors)
-
 export default function ColorCarousel() {
     return (
         <div className="flex gap-[16px] mt-[24px] mx-auto px-[24px] max-w-[1200px] overflow-scroll scrollbar-none">
