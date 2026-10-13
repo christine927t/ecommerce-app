@@ -20,6 +20,7 @@ export default function CartDrawer({ cartOpen, onCartOpen, onCartClose }: Props)
     const items = useCartStore((state) => state.items)
     const removeItem = useCartStore((state) => state.removeItem)
     const updateQuantity = useCartStore((state) => state.updateQuantity)
+    const cloudinaryBaseUrl = import.meta.env.VITE_CLOUDINARY_URL;
 
     const subtotal = items.reduce(
         (total, item) =>
@@ -80,7 +81,7 @@ export default function CartDrawer({ cartOpen, onCartOpen, onCartClose }: Props)
                     <div key={`${item.product.id}-${item.color}-${item.size}`}>
                         <div className="flex justify-between py-6 border-b border-[#e6e6e6]">
                             <div className="flex gap-3">
-                                <img src={item.product.imageUrl} alt={item.product.name} className="size-[100px] object-cover"/>
+                                <img src={`${cloudinaryBaseUrl}${item.product.imageUrl}`} alt={item.product.name} className="size-[100px] object-cover"/>
                                 <div className="flex flex-col justify-between">
                                     <div>
                                         <p className="text-[13px] font-semibold mb-1">{item.product.name}</p>

@@ -46,6 +46,7 @@ export default function AddedToCart(
         const theme = useTheme()
         const isMobile = useMediaQuery(theme.breakpoints.down('md'));
         const itemLength = useCartStore((state) => state.items.length)
+        const cloudinaryBaseUrl = import.meta.env.VITE_CLOUDINARY_URL;
 
         return (
             <React.Fragment>
@@ -90,7 +91,7 @@ export default function AddedToCart(
                     </IconButton>
                     <DialogContent sx={{ padding: '20px 0px' }}>
                         <div className="flex gap-4">
-                            <img src={product.imageUrl} alt={product.name} className="size-[100px] object-cover rounded-[8px]"/>
+                            <img src={`${cloudinaryBaseUrl}${product.imageUrl}`} alt={product.name} className="size-[100px] object-cover rounded-[8px]"/>
                             <div className="flex flex-col justify-between">
                                 <div>
                                     <p className="text-[13px] font-semibold mb-1">{product.name}</p>
