@@ -8,7 +8,7 @@ const colors = Object.entries(colorCarousel).map(([path, src])=> {
     const name = filename.replace(/\.(webp|avif)$/i, '');
 
     return {
-        name: name.replaceAll('-', ''),
+        name: name.replaceAll('-', ' '),
         src
     }
 })

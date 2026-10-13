@@ -15,7 +15,7 @@ const categories = Object.entries(shopByImages).map(([path, src])=> {
 
 export default function ShopByCategory() {
     return (
-        <section className="mt-[40px] px-4">
+        <section className="mt-[40px] px-4 max-w-[1600px] m-auto">
             <p className="text-[17px] font-semibold">PLUMS By Category</p>
             <div className="mt-[24px] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
                 {categories.map((category, index) => {
