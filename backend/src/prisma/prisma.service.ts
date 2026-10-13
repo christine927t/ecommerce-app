@@ -10,29 +10,41 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    const host = process.env.DB_HOST!;
-    const port = Number(process.env.DB_PORT ?? 5432);
-    const user = process.env.DB_USER ?? 'postgres';
-    const database = process.env.DB_NAME ?? 'postgres';
-    const region = process.env.AWS_REGION ?? 'us-east-2';
+    const dbHost = process.env.DB_HOST;
 
-    const signer = new Signer({
-      hostname: host,
-      port,
-      username: user,
-      region,
-    });
+    if (dbHost) {
+      // AWS: connect using IAM authentication and SSL.
+      const port = Number(process.env.DB_PORT ?? 5432);
+      const user = process.env.DB_USER ?? 'postgres';
+      const database = process.env.DB_NAME ?? 'postgres';
+      const region = process.env.AWS_REGION ?? 'us-east-2';
 
-    const adapter = new PrismaPg({
-      host,
-      port,
-      user,
-      database,
-      password: async () => signer.getAuthToken(),
-      ssl: { rejectUnauthorized: false },
-    });
+      const signer = new Signer({
+        hostname: dbHost,
+        port,
+        username: user,
+        region,
+      });
 
-    super({ adapter });
+      const adapter = new PrismaPg({
+        host: dbHost,
+        port,
+        user,
+        database,
+        password: async () => signer.getAuthToken(),
+        ssl: { rejectUnauthorized: false },
+      });
+
+      super({ adapter });
+    } else {
+      // Local development: use DATABASE_URL and the local Docker database.
+      const adapter = new PrismaPg({
+        connectionString: process.env.DATABASE_URL!,
+        ssl: false,
+      });
+
+      super({ adapter });
+    }
   }
 
   async onModuleInit() {
