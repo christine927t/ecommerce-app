@@ -34,11 +34,11 @@ export default function MenuGroup({ index }: Props) {
             <div className="flex flex-col gap-3">
                 <p className="text-[14px] font-bold tracking-[3px]">Highlights</p>
                 {index === 0 ? (
-                    <Link to="/products">
+                    <Link to="/products?category=1">
                         <MenuItem sx={MenuItemSx}>Women's Home</MenuItem>
                     </Link>
                 ) : (
-                    <Link to="/products">
+                    <Link to="/products?category=2">
                         <MenuItem sx={MenuItemSx}>Men's Home</MenuItem>
                     </Link>
                 )}

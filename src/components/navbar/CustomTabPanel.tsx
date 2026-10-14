@@ -47,9 +47,9 @@ export default function CustomTabPanel({ index, value, onCloseDrawer }: TabPanel
                 <div className="flex flex-col gap-2">
                     <p className="text-[15px] font-bold tracking-[3px]">Highlights</p>
                     {index === 0 ? (
-                        <Link to="/products" onClick={onCloseDrawer} className="text-[14px] font-light py-1">Women's Home</Link>
+                        <Link to="/products?category=1" onClick={onCloseDrawer} className="text-[14px] font-light py-1">Women's Home</Link>
                     ) : (
-                        <Link to="/products" onClick={onCloseDrawer} className="text-[14px] font-light py-1">Men's Home</Link>
+                        <Link to="/products?category=2" onClick={onCloseDrawer} className="text-[14px] font-light py-1">Men's Home</Link>
                     )}
                     {highlightLinks.map((highlightLink, index) => (
                         <Link key={index} to="/products" onClick={onCloseDrawer} className="text-[14px] font-light py-1">{highlightLink}</Link>

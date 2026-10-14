@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service.js';
 import { CreateProductDto } from './dto/create-product.dto/create-product.dto.js';
 
@@ -7,8 +7,12 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query('category') categoryId?: string) {
+    if (categoryId === undefined) {
+      return this.productsService.findAll();
+    }
+
+    return this.productsService.findByCategory(Number(categoryId));
   }
 
   @Get('slug/:slug')

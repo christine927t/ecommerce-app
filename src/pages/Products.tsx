@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
 import { fetchProducts, fetchCategories } from '../services/api'
 import {
     CircularProgress,
@@ -11,15 +12,24 @@ import ProductCard from '../components/products/ProductCard'
 
 export default function Products() {
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
+    const [searchParams] = useSearchParams();
+    const categoryId = searchParams.get("category");
 
     const {
         data: products = [],
         isLoading,
         error,
     } = useQuery<Product[]>({
-        queryKey: ['products'],
-        queryFn: fetchProducts,
+        queryKey: ['products', categoryId],
+        queryFn: () => 
+            categoryId 
+                ? fetchProducts(Number(categoryId))
+                : fetchProducts()
     });
+
+    useEffect(() => {
+        setSelectedCategory(categoryId ? Number(categoryId) : null)
+    }, [categoryId])
 
     const {
         data: categories = [],
@@ -29,6 +39,11 @@ export default function Products() {
         queryKey: ['categories'],
         queryFn: fetchCategories
     })
+
+    async function fetchProductsByCategory(catId) {
+        fetchProducts(Number(catId))
+        setSelectedCategory(catId)
+    }
 
     const buttonSx = {
         border: 'none',
@@ -48,7 +63,6 @@ export default function Products() {
 
     return (
         <Container 
-            className="" 
             sx={{
                 py: 4,
                 px: { xs: 0, md: 0 }    
@@ -72,7 +86,7 @@ export default function Products() {
                 {categories.map((category) => (   
                     <div key={category.id} className="relative">
                         <Button
-                            onClick={() => setSelectedCategory(category.id)}
+                            onClick={() => fetchProductsByCategory(category.id)}
                             sx={buttonSx}
                         >
                             {category.name}

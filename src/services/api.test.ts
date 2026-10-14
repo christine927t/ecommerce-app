@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import {
     fetchProducts,
     fetchCategories,
-    fetchProductBySlug,
+    fetchProductBySlug
 } from './api'
 
 describe('API services', () => {
@@ -83,6 +83,32 @@ describe('API services', () => {
         expect(result).toEqual(product)
         expect(fetch).toHaveBeenCalledWith(
             'http://localhost:3000/products/slug/catarina-scrub-top'
+        )
+    })
+
+    it('fetches products by category id', async () => {
+        const product = {
+            id: 1,
+            name: 'Catarina Scrub Top',
+            slug: 'catarina-scrub-top',
+            price: '38.00',
+            categoryId: 1
+        }
+
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+            new Response(JSON.stringify(product), {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        )
+
+        const result = await fetchProducts(1)
+
+        expect(result).toEqual(product)
+        expect(fetch).toHaveBeenCalledWith(
+            'http://localhost:3000/products?category=1'
         )
     })
 

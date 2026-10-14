@@ -48,6 +48,20 @@ export class ProductsService {
     return product;
   }
 
+  async findByCategory(categoryId: number) {
+    const products = await this.prisma.product.findMany({
+      where: {
+        categoryId
+      }
+    })
+
+    if (products.length === 0) {
+      throw new NotFoundException(`Products with categoryId: "${categoryId}" not found`);
+    }
+
+    return products;
+  }
+
   async create(createProductDto: CreateProductDto) {
     return this.prisma.product.create({
       data: createProductDto,
