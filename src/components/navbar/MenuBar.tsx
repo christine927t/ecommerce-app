@@ -25,7 +25,7 @@ const StyledMenubar = styled('div')(({ theme }) => ({
   p: 0.25,
   '&[aria-orientation="vertical"]': {
     flexDirection: 'column',
-  },
+  }
 }));
 export function Menubar(props: React.ComponentProps<typeof BaseMenubar>) {
   return <BaseMenubar render={<StyledMenubar />} {...props} />;
@@ -90,7 +90,15 @@ export function MenuPopup(props: React.ComponentProps<typeof Menu.Popup>) {
   return (
     <Menu.Popup
       render={(renderProps) => (
-        <StyledPaper elevation={8}>
+        <StyledPaper 
+          elevation={8} 
+          sx={{ 
+            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;',
+            paddingBlock: '0px',
+            width: '100vw',
+            transform: 'translate(-6px, 0px)'
+          }}
+        >
           <List
             component="div"
             disablePadding
@@ -122,7 +130,16 @@ export function MenuItem(
       render={
         <ListItemButton
           dense
-          sx={[{ gap: 1.5 }, ...(Array.isArray(sx) ? sx : [sx])]}
+          sx={[
+            { 
+              gap: 1.5, 
+              padding: 0, 
+              '&:hover': {
+                backgroundColor: 'transparent',
+              }
+            },
+            ...(Array.isArray(sx) ? sx : [sx]),
+          ]}
         />
       }
       {...other}
@@ -131,7 +148,10 @@ export function MenuItem(
       <ListItemText secondary={secondary}>{children}</ListItemText>
       {hint && (
         <Typography
-          sx={{ flexShrink: 0, color: 'text.secondary', typography: 'body2' }}
+          sx={{ 
+            flexShrink: 0, 
+            color: 'text.secondary'
+          }}
         >
           {hint}
         </Typography>

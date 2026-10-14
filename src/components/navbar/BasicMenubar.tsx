@@ -8,10 +8,8 @@ import {
   MenuPopup,
   MenuItem,
   MenuSeparator,
-  MenuSubmenuRoot,
-  MenuSubmenuTrigger,
 } from './MenuBar';
-
+import MenuGroup from './MenuGroup';
 import '../../styles/basic-menubar.css'
 
 export default function BasicMenubar() {
@@ -20,40 +18,19 @@ export default function BasicMenubar() {
       <MenuRoot>
         <MenuTrigger>Women</MenuTrigger>
         <MenuPortal>
-          <MenuPositioner sideOffset={4} alignOffset={-2}>
+          <MenuPositioner >
             <MenuPopup>
-              <MenuItem>New</MenuItem>
-              <MenuItem>Open…</MenuItem>
-              <MenuItem>Save</MenuItem>
-              <MenuItem>Save as…</MenuItem>
-              <MenuSeparator />
-              <MenuSubmenuRoot>
-                <MenuSubmenuTrigger>Share</MenuSubmenuTrigger>
-                <MenuPortal>
-                  <MenuPositioner alignOffset={-4}>
-                    <MenuPopup>
-                      <MenuItem>Email link</MenuItem>
-                      <MenuItem>Copy link</MenuItem>
-                    </MenuPopup>
-                  </MenuPositioner>
-                </MenuPortal>
-              </MenuSubmenuRoot>
-              <MenuSeparator />
-              <MenuItem>Close</MenuItem>
+              <MenuGroup index={0} />
             </MenuPopup>
           </MenuPositioner>
         </MenuPortal>
       </MenuRoot>
-
       <MenuRoot>
         <MenuTrigger>Men</MenuTrigger>
         <MenuPortal>
-          <MenuPositioner sideOffset={4}>
+          <MenuPositioner>
             <MenuPopup>
-              <MenuItem>Documentation</MenuItem>
-              <MenuItem>Release notes</MenuItem>
-              <MenuSeparator />
-              <MenuItem>About</MenuItem>
+              <MenuGroup index={1} />
             </MenuPopup>
           </MenuPositioner>
         </MenuPortal>
