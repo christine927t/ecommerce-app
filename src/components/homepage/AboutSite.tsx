@@ -30,7 +30,8 @@ export default function AboutSite({ openAboutSite, onClose }: Props) {
       >
         <DialogContent>
           <div className="text-[14px]">
-            <p className="text-[16px] font-semibold text-center mb-2">This site is intended for portfolio purposes only and is a work in progress.</p>
+            <p className="text-[16px] font-semibold text-center px-4">This site is intended for portfolio purposes only and is a work in progress.</p>
+            <p className="text-[16px] font-semibold text-center mb-2 px-5">Built by Christine Treacy; all images and content copyright Figs, Inc.</p>
             <p className="mb-1">I built this fullstack app using:</p>
             <div className="flex align-center gap-10">
               <div className="mb-1 w-50">

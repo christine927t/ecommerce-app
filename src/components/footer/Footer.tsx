@@ -23,8 +23,8 @@ export default function Footer() {
 
             <div className='px-4 pt-12 flex flex-col gap-6 items-center justify-center'>
                 <div className="flex flex-col gap-3 items-center justify-center text-[#a3a3a3]">
-                    <p className="text-[13px]">2026 PLUMS, INC. ALL RIGHTS RESERVED</p>
-                    <p className="text-[11px]">Terms of Use * Privacy Policy</p>
+                    <p className="text-[13px]">2026 PLUMS, INC. - Site made by Christine Treacy - all images and content copyright FIGS, Inc.</p>
+                    <p className="text-[11px]">Terms of Use - Privacy Policy</p>
                 </div>
             </div>
         </footer>

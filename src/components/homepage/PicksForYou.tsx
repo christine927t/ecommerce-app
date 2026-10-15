@@ -38,7 +38,7 @@ export default function PicksForYou() {
     return (
         <section className="">
             <p className="text-[17px] font-bold mb-6 ps-4">Picks for You</p>
-            <div className="relative">
+            <div className="relative max-w-[1920px] mx-auto">
                 { scrollLeft > 0 && <ScrollButton direction="left" element="picks-container" /> }
                 <div id="picks-container" className="flex gap-4 overflow-scroll scrollbar-none mt-4 px-4 mb-10">
                     {products.map((product, index) => {
