@@ -15,12 +15,6 @@ type Props= {
   onCartClose: (value: boolean) => void
 }
 export default function Navbar({ cartOpen, onCartOpen, onCartClose }: Props) {
-  // const [open, setOpen] = React.useState(false);
-
-  // const toggleDrawer = (newOpen: boolean) => () => {
-  //     setOpen(newOpen);
-  // };
-  
   return (
     <AppBar sx={{
       position: 'relative',

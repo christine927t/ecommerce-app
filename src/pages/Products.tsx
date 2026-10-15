@@ -12,7 +12,7 @@ import ProductCard from '../components/products/ProductCard'
 
 export default function Products() {
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const categoryId = searchParams.get("category");
 
     const {
@@ -40,9 +40,14 @@ export default function Products() {
         queryFn: fetchCategories
     })
 
-    async function fetchProductsByCategory(catId) {
-        fetchProducts(Number(catId))
-        setSelectedCategory(catId)
+    async function fetchProductsByCategory(catId: number | null) {
+        if (catId) {
+            setSearchParams({ category: String(catId) })
+            setSelectedCategory(catId)
+        } else {
+            setSearchParams({})
+            setSelectedCategory(null)
+        }
     }
 
     const buttonSx = {
@@ -71,7 +76,7 @@ export default function Products() {
             <header className="mb-8 flex justify-center gap-10">
                 <div className="relative">
                     <Button
-                        onClick={() => setSelectedCategory(null)}
+                        onClick={() => fetchProductsByCategory(null)}
                         sx={buttonSx}
                     >
                         All

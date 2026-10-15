@@ -51,7 +51,7 @@ export default function MenuGroup({ index }: Props) {
              <div className="flex flex-col gap-3">
                 <p className="text-[14px] font-bold tracking-[3px]">Highlights</p>
                 {links.map((link: string, index: number) => (
-                    <Link to="/products" key={index} className="text-[12px]">
+                    <Link to="/products?category=3" key={index} className="text-[12px]">
                         <MenuItem sx={MenuItemSx}>{link}</MenuItem>
                     </Link>
                 ))}
