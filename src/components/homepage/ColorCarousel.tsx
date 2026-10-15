@@ -38,7 +38,7 @@ export default function ColorCarousel() {
     return (
         <div className="relative">
             { scrollLeft > 0 && <ScrollButton direction="left" element="carousel-container" /> }
-            <div id="carousel-container" className="flex gap-[16px] mt-[24px] mx-auto px-[24px] max-w-[1200px] overflow-scroll scrollbar-none">
+            <div id="carousel-container" className="flex gap-4 mt-6 mx-auto px-4 max-w-[1200px] overflow-scroll scrollbar-none">
                 {colors.map((color, index) => {
                     return (
                         <div key={'color-container-' + color.name} className="flex flex-col gap-2 min-h-[200px]">

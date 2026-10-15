@@ -8,11 +8,19 @@ type Props = {
 
 function scrollContainer(direction: string, element: string) {
     const colorContainer = document.getElementById(element)
+    if (!colorContainer) return;
 
-    colorContainer?.scrollBy({
-        left: direction === 'right' ? 300: -300,
-        behavior: 'smooth'
-    })
+    if (element === 'carousel-container') {
+        colorContainer.scrollBy({
+            left: direction === 'right' ? 300: -300,
+            behavior: 'smooth'
+        })
+    } else {
+        colorContainer.scrollBy({
+            left: direction === 'right' ? 500: -500,
+            behavior: 'smooth'
+        })
+    }
 }
 
 export default function ScrollButton({direction, element}: Props) {
@@ -21,8 +29,9 @@ export default function ScrollButton({direction, element}: Props) {
             type="button" 
             onClick={() => scrollContainer(direction, element)} 
             className={
-                `absolute right-[11px] bottom-[107px] size-[42px] bg-white rounded-full flex justify-center items-center ` + 
-                (direction === 'right' ? 'right-[11px] bottom-[107px]' : 'left-[11px] bottom-[107px]')
+                `absolute cursor-pointer size-[42px] bg-white rounded-full flex justify-center items-center ` + 
+                (direction === 'right' ? 'right-[11px] ' : 'left-[11px] ') +
+                (element === 'carousel-container' ? 'bottom-[107px]' : 'bottom-[269px]')
             }
         >
             { direction === "right" 
