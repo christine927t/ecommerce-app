@@ -29,7 +29,7 @@ export default function AboutSite({ openAboutSite, onClose }: Props) {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogContent>
-          <div className="text-[14px]">
+          <div className="text-[14px] flex flex-col">
             <p className="text-[16px] font-semibold text-center px-4">This site is intended for portfolio purposes only and is a work in progress.</p>
             <p className="text-[16px] font-semibold text-center mb-2 px-5">Built by Christine Treacy; all images and content copyright Figs, Inc.</p>
             <p className="mb-1">I built this fullstack app using:</p>
@@ -65,13 +65,23 @@ export default function AboutSite({ openAboutSite, onClose }: Props) {
                 </ul>
               </div>
             </div>
+            <Button 
+              onClick={handleClose} 
+              sx={{ 
+                  fontSize: '16px', 
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid #282828', 
+                  color: '#282828', 
+                  borderRadius: '0px', 
+                  padding: 0, 
+                  alignSelf: 'center',
+                  marginTop: '16px'
+                }}
+              >
+              Got it!
+            </Button>
           </div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>
-            Got it!
-          </Button>
-        </DialogActions>
       </Dialog>
     </React.Fragment>
   );
