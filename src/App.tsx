@@ -7,6 +7,7 @@ import Navbar from '/src/components/navbar/Navbar.tsx'
 import Footer from '/src/components/footer/Footer.tsx'
 import Products from './pages/Products.tsx';
 import ProductDetails from './pages/ProductDetails.tsx';
+import ScrollToTop from './components/ScrollToTop.tsx';
 
 import "/src/App.css";
 
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Banner />
         <Navbar 
           cartOpen={cartOpen} 
